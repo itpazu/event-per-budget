@@ -6,7 +6,6 @@ const eventSlice = createSlice({
     initialState,
     reducers: {
         updateBudget: (state, action: PayloadAction<number>) => {
-            console.log(action.payload ?? "hello")
             state.budget = action.payload
 
         }

@@ -1,5 +1,5 @@
 'use client';
-import { useState } from "react";
+
 import { useAppDispatch, useAppSelector } from '@/redux/reduxHooks';
 import { updateBudget } from '@/redux/reducers';
 
@@ -18,7 +18,6 @@ export default function BudgetInput({ readOnly, textColor = "green" }: { readOnl
                     dispatch(updateBudget(parseInt(e.currentTarget.value) || 0
                     ))}
             />
-
         </div>
     )
 }
