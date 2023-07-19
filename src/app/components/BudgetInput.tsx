@@ -8,7 +8,7 @@ export default function BudgetInput({ readOnly, textColor = "green" }: { readOnl
     const { budget, spending } = useAppSelector(state => state.eventSlice)
     const dispatch = useAppDispatch()
     return (
-        <div className="h-10 w-16 basis-[30%]">
+        <div className="h-10 min-w-16 basis-[30%]">
             <input readOnly={!!readOnly}
                 className={`h-full text-${textColor}-500 w-full text-center text-xl bg-zinc-300 border rounded`}
                 type={readOnly ? "text" : "number"}

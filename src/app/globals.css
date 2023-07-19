@@ -24,6 +24,8 @@
   }
 }
 
+html{scroll-behavior:smooth}
+
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
@@ -36,4 +38,20 @@ body {
 .scroll-container::-webkit-scrollbar {
   display: none;
 
+}
+
+
+
+.program-btn:hover::after{
+  @apply capitalize lg:absolute lg:top-[56px] lg:left-0 md:mb-0;
+  content: "budget is lower than current spending!";
+  display: block;
+  min-width: 150px;
+  border: 1px #aaaaaa solid;
+  border-radius: 10px;
+  background-color: #ffffcc;
+  padding: 12px;
+  color: #971919;
+  font-size: 14px;
+  z-index: 1;
 }

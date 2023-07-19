@@ -1,12 +1,13 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, Shadows_Into_Light, Source_Code_Pro } from 'next/font/google'
 import Image from 'next/image'
 import ReduxProvider from '@/redux/provider';
 import HeaderFooter from './components/HeaderFooter';
 
 const inter = Inter({ subsets: ['latin'] })
-
+const ShadowsIntoLight = Shadows_Into_Light({ weight: "400", subsets: ['latin'], variable: '--font-shadow' })
+const SourceCodePro = Source_Code_Pro({ weight: "500", subsets: ['latin'], variable: '--font-source' })
 export const metadata: Metadata = {
   title: 'Events Per Budget',
   description: 'cultural events for your budget',
@@ -18,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${ShadowsIntoLight.variable} ${SourceCodePro.variable}`}>
       <body className={inter.className}>
         <ReduxProvider>
           <main className="flex min-h-screen flex-col items-center lg:justify-start pb-32 pt-8 px-8 md:p-24 text-center">
