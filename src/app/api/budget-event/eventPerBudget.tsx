@@ -15,7 +15,7 @@ export default function EventPerBudget({ data }: { data: Array<[number, EventPro
 
     }, [data])
 
-    const { spending, budget } = useAppSelector(state => state.eventSlice)
+    const { spending, budget, selectedEvent } = useAppSelector(state => state.eventSlice)
 
     const HorizontalScroll = (id: string, right: boolean) => {
         const slider = document.getElementById(id)
@@ -25,6 +25,11 @@ export default function EventPerBudget({ data }: { data: Array<[number, EventPro
     const checkIfInBudget = (cost: number) => {
 
         return !(cost <= budget - spending)
+
+    }
+    const checkIfSelected = (eventId: number) => {
+
+        return selectedEvent.some(event => event.id === eventId)
 
     }
     return (
@@ -58,17 +63,22 @@ export default function EventPerBudget({ data }: { data: Array<[number, EventPro
 
 
                                 {
-                                    group.map(({ id, name, cost, details }) =>
-                                        <>
+                                    group.map((event) => {
+                                        const { id, name, cost, details } = event
+                                        return (
 
-                                            <div key={name + id} className="min-w-[75%] lg:min-w-[55%] mx-3">
-                                                <Event id={id} name={name} cost={cost} details={details} >
-                                                    <CheckBox eventId={id} cost={cost} disabled={checkIfInBudget(cost)} />
-                                                </Event>
+                                            <>
+
+                                                <div key={name + id} className="min-w-[75%] lg:min-w-[55%] mx-3">
+                                                    <Event id={id} name={name} cost={cost} details={details} >
+                                                        <CheckBox event={event} disabled={checkIfInBudget(cost) || checkIfSelected(id)} isSelected={checkIfSelected(id)} />
+                                                    </Event>
 
 
-                                            </div>
-                                        </>
+                                                </div>
+                                            </>
+                                        )
+                                    }
                                     )
                                 }
 

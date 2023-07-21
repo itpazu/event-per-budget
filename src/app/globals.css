@@ -43,7 +43,7 @@ body {
 
 
 .program-btn:hover::after{
-  @apply capitalize lg:absolute lg:top-[56px] lg:left-0 md:mb-0;
+  @apply capitalize lg:absolute lg:top-[56px] lg:left-[35%] md:mb-0;
   content: "budget is lower than current spending!";
   display: block;
   min-width: 150px;
@@ -55,3 +55,26 @@ body {
   font-size: 14px;
   z-index: 1;
 }
+
+.selected-grid { 
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+}
+
+.animate-selected { 
+ 
+    animation-duration: 0.3s;
+    animation-name: slidein;
+    animation-direction: alternate;
+}
+  
+  @keyframes slidein {
+    from {
+      transform:translateX(-1500px);
+      
+    }
+  
+    to {
+      transform:translateX(0px);
+
+    }
+  }

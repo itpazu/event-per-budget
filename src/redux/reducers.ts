@@ -4,10 +4,11 @@ import { EventProps } from "@/app/components/event";
 type InitialState = {
     budget: number;
     spending: number;
-    eventPerBudget: Array<[number, EventProps[]]>
+    eventPerBudget: Array<[number, EventProps[]]>;
+    selectedEvent: Array<EventProps>;
 }
 
-const initialState: InitialState = { budget: 0, spending: 0, eventPerBudget: [] }
+const initialState: InitialState = { budget: 0, spending: 0, eventPerBudget: [], selectedEvent: [] }
 const eventSlice = createSlice({
     name: 'events',
     initialState,
@@ -21,12 +22,28 @@ const eventSlice = createSlice({
         },
         updateSpending: (state, action: PayloadAction<number>) => {
             state.spending = state.spending + action.payload
+        },
+        setSelectedEvent: (state, { payload: { event } }: PayloadAction<{ event: EventProps }>) => {
+
+            state.selectedEvent.push(event)
+
+        },
+        deleteSelectedEvent: (state, action: PayloadAction<number>) => {
+
+            state.selectedEvent = state.selectedEvent.filter(event => event.id !== action.payload)
+
+        },
+        resetSelected: (state, _) => {
+            state.selectedEvent = []
+            state.spending = 0
         }
     },
+
+
 
 })
 
 
-export const { updateBudget, setEventsPerBudget, updateSpending } = eventSlice.actions
+export const { updateBudget, setEventsPerBudget, updateSpending, setSelectedEvent, deleteSelectedEvent, resetSelected } = eventSlice.actions
 
 export default eventSlice.reducer
