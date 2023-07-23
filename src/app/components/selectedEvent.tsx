@@ -12,7 +12,7 @@ export default function SelectedEvent({ name, cost, details, collapse }: Partial
             </div>
 
 
-            <div className="text-md text-red-500"> {cost} NIS</div>
+            <div className="text-md text-red-500"> {cost} ₪</div>
             <div className=" text-sm line-clamp-3"> {details}</div>
 
         </div>

@@ -10,12 +10,15 @@ export default function Event({ name, cost, details, category, children }: Event
 
     return (
 
-        <div className="flex flex-col shadow-lg drop-shadow-2xl rounded border-2 border-white-600 p-5 min-w-full min-h-[45vh] sm:min-h-[40vh] items-center justify-around font-mono ">
+        <div className="flex flex-col shadow-lg drop-shadow-2xl rounded border-2 border-white-600 p-5 min-w-full min-h-[45vh] sm:min-h-[40vh] items-center justify-around font-mono text-center font-extrabold">
             {children && children}
-            <div className='absolute top-[-7px] right-[-32px] rotate-45  border-x-transparent border-x-[50px] h-0 w-0 border-b-[50px] border-b-white'>
-                <p className="relative top-4 right-5 text-purple-500 whitespace-break">
-                    musicjljsgjhgkljsdf
-                </p>
+            <div className='absolute top-[-12px] right-[-52px] rotate-45  border-x-transparent border-x-[80px] h-0 w-0 border-b-[80px] border-b-white'>
+                <div className="w-[115px]">
+
+                    <p className="relative top-14 left-[55px] text-purple-500 whitespace-break overflow-hidden text-ellipsis">
+                        {category}
+                    </p>
+                </div>
             </div>
 
             <div className="uppercase text-lg w-full">
@@ -23,7 +26,7 @@ export default function Event({ name, cost, details, category, children }: Event
                 <p className="text-3xl text-center text-ellipsis whitespace-nowrap"> {name}</p>
             </div>
 
-            <div className="text-lg"> Price: {cost}NIS</div>
+            <div className="text-lg" dir="rtl"> מחיר: {cost} שח </div>
 
             <div className="text-lg line-clamp-3 hover:line-clamp-none">  {details}</div>
         </div>

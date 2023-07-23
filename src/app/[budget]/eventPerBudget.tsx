@@ -16,7 +16,7 @@ export default function EventPerBudget({ data }: { data: Array<[number, EventPro
 
     }, [data])
 
-    const { spending, budget, selectedEvent, category } = useAppSelector(state => state.eventSlice)
+    const { spending, budget, selectedEvent } = useAppSelector(state => state.eventSlice)
     const HorizontalScroll = (id: string, right: boolean) => {
         const slider = document.getElementById(id)
         slider!.scrollLeft = right ? slider!.scrollLeft + 200 : slider!.scrollLeft - 200
@@ -44,8 +44,8 @@ export default function EventPerBudget({ data }: { data: Array<[number, EventPro
                         </button>}
                         <div className="h-[8vh] backdrop-blur-2xl" >
 
-                            <p id={`category-${groupNumber}`} className="h-full flex flex-col justify-center text-2xl">
-                                {groupNumber} NIS
+                            <p id={`category-${groupNumber}`} className="h-full flex flex-col justify-center text-3xl">
+                                {groupNumber} ₪
                             </p>
                         </div>
                         {group.length > 1 &&

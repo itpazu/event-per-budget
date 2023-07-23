@@ -6,7 +6,7 @@ import { resetSelected } from '@/redux/reducers';
 import SelectedEvent from './selectedEvent';
 import { BiCollapseVertical } from 'react-icons/bi';
 
-export default function SelectedEvents({ children }: { children?: React.ReactNode }) {
+export default function SelectedEvents() {
 
     const dispatch = useAppDispatch()
     const { selectedEvent = [] } = useAppSelector(state => state.eventSlice)
@@ -15,24 +15,24 @@ export default function SelectedEvents({ children }: { children?: React.ReactNod
 
         <>
             {selectedEvent.length > 0 &&
-                <div className='selected-grid gap-x-4 gap-y-1 grid min-w-[40%] max-w-full mb-4 p-2 rounded-lg from-zinc-300 to-blue-200 bg-gradient-to-tr'>
-                    <div className='col-span-full p-2 font-sans text-2xl capitalize grid grid-cols-6  gap-6 place-items-end'>
+                <div className='selected-grid gap-x-4 gap-y-1 grid min-w-[40%] max-w-full mb-4 p-2 rounded-lg from-zinc-300 to-black bg-gradient-to-tr bg-blur-2xl font-extrabold text-white'>
+                    <div className='col-span-full p-2 font-sans text-2xl capitalize grid grid-cols-6 gap-6 place-items-end'>
                         <button className='place-self-start col-span-1'
                             onClick={() => setCollapse(!collapse)}
                         >
-                            <BiCollapseVertical />
+                            <BiCollapseVertical color='white' />
                         </button>
-                        <p className='col-span-3'>Selected programs</p>
+                        <p className='col-span-3'>תוכניות שנבחרו</p>
                         <button
                             className='col-span-2 bg-red-400 p-2 shadow-md rounded-lg font-mono text-sm text-white'
                             onClick={() => dispatch(resetSelected({}))}
 
-                        >clear choice</button>
+                        >נקה בחירה</button>
                     </div>
 
-                    {selectedEvent.map(({ name, cost, details }) => (
+                    {selectedEvent.map(({ name, cost, details }, idx) => (
 
-                        <SelectedEvent name={name} cost={cost} details={details} collapse={collapse} />
+                        <SelectedEvent key={name + cost + idx} name={name} cost={cost} details={details} collapse={collapse} />
                     ))}
 
                 </div>

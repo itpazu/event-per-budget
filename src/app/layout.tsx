@@ -18,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${ShadowsIntoLight.variable} ${SourceCodePro.variable}`}>
+    <html lang="en | he" dir="rtl" className={`${ShadowsIntoLight.variable} ${SourceCodePro.variable}`}>
       <body >
         <ReduxProvider>
           <main className="flex min-h-screen flex-col items-center lg:justify-start pb-32 pt-8 px-8 md:p-24 text-center">

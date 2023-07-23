@@ -16,12 +16,10 @@ export default function CheckBox({ event, disabled, isSelected }: { event: Event
 
     }
     return (
-        <>
-            <div className='self-start w-[25px] h-[25px] flex place-content-center' >
+        <div className='self-end w-[25px] h-[25px] flex place-content-center' >
 
-                <input disabled={disabled && !isSelected} type="checkbox" className="w-full h-full" onChange={onChecked} checked={isSelected} />
-            </div>
-        </>
+            <input disabled={disabled && !isSelected} type="checkbox" className="w-full h-full" onChange={onChecked} checked={isSelected} />
+        </div>
     )
 }
 

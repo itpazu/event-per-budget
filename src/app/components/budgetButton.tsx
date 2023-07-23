@@ -23,7 +23,7 @@ export default function BudgetButton() {
                     }
                 >
 
-                    get programms
+                    מצא פעילויות
                 </button>
             </Link>
 
