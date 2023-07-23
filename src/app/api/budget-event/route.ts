@@ -1,5 +1,6 @@
 import { NextResponse, NextRequest } from 'next/server'
-import { EventProps, getData, optimal_combination } from '../utils/getData'
+import { getData, optimal_combination } from '../utils/getData'
+import { EventProps } from '@/app/components/event';
 
 export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url)

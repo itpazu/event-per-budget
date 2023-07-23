@@ -1,6 +1,6 @@
 'use client';
 
-import { useAppDispatch, useAppSelector } from '@/redux/reduxHooks';
+import { useAppSelector } from '@/redux/reduxHooks';
 import Link from 'next/link';
 
 export default function BudgetButton() {
@@ -11,7 +11,7 @@ export default function BudgetButton() {
 
             <Link
                 href={`/${budget}`}
-                className={budget < spending ? "pointer-events-none" : 'pointer-events-auto'}
+                className={budget === 0 || budget < spending ? "pointer-events-none" : 'pointer-events-auto'}
 
             >
 

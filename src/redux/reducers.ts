@@ -4,11 +4,12 @@ import { EventProps } from "@/app/components/event";
 type InitialState = {
     budget: number;
     spending: number;
+    category: string;
     eventPerBudget: Array<[number, EventProps[]]>;
     selectedEvent: Array<EventProps>;
 }
 
-const initialState: InitialState = { budget: 0, spending: 0, eventPerBudget: [], selectedEvent: [] }
+const initialState: InitialState = { budget: 0, spending: 0, eventPerBudget: [], selectedEvent: [], category: '' }
 const eventSlice = createSlice({
     name: 'events',
     initialState,

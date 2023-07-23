@@ -28,12 +28,12 @@ html{scroll-behavior:smooth}
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: url('/background.jpg');
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
 }
 .scroll-container::-webkit-scrollbar {
   display: none;
@@ -41,6 +41,13 @@ body {
 }
 
 
+.bg-image-lights {
+  background: url('/background-fixed.jpg');
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 
 .program-btn:hover::after{
   @apply capitalize lg:absolute lg:top-[56px] lg:left-[35%] md:mb-0;
