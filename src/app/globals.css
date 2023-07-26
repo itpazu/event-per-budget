@@ -49,6 +49,7 @@ body {
   background-repeat: no-repeat;
 }
 
+
 .program-btn:hover::after{
   @apply capitalize block absolute top-[0px] md:mb-0;
   content: "התקציב שנבחר נמוך מההוצאה הכוללת עד כה!";

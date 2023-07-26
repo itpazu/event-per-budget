@@ -1,5 +1,68 @@
 import { EventProps } from "@/app/components/event";
+import qs from 'qs';
 
+type DataObject<AT> = {
+    id: number, attributes: AT &
+    {
+        createdAt: string,
+        updatedAt: string,
+        publishedAt: string,
+    }
+}
+export type StrapiData<AT> = {
+    data: Array<DataObject<AT>>,
+    meta?: { pagination: { page: number, pageSize: number, pageCount: number, total: number } }
+}
+
+
+type VideoObject = {
+
+    name: string,
+    alternativeText: null | string;
+    caption: null | string;
+    width: null | number;
+    height: null | number;
+    formats: null | number;
+    hash: string;
+    ext: string;
+    mime: string;
+    size: number;
+    url: string;
+    previewUrl: null | string;
+    provider: string;
+    provider_metadata: null | string;
+
+}
+
+
+export type FetchEvent = StrapiData<Omit<EventProps, "category" | "id"> &
+{
+    category: {
+        data: DataObject<{ category: string }>
+    },
+    video?: {
+        data: DataObject<VideoObject>
+    }
+}>
+
+export function getFromStrapi<AT>(path: string, urlParams: {} | null = null): Promise<AT> {
+    const BASE_URL = process.env.STRAPI_URL
+    const searchParams = urlParams ? qs.stringify(urlParams, {
+        encodeValuesOnly: true
+    }) : '';
+    console.log(`${BASE_URL}/${path}?${searchParams}`)
+    return fetch(`${BASE_URL}/${path}?${searchParams}`, { next: { revalidate: 100 } })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(response.statusText)
+            }
+            return response.json() as Promise<AT>
+        }
+        )
+}
+
+
+export const getDataModel = (res: FetchEvent) => res ? res.data.map(({ id, attributes }) => ({ id, ...attributes, category: attributes.category.data.attributes.category })) : []
 export const getData = (): Promise<EventProps[]> => {
     return new Promise((resolve, reject) => {
         resolve([
@@ -107,3 +170,9 @@ export const optimal_combination = (budget: number, programs: number[]) => {
     }
     return optimalCombo;
 };
+
+// logic for organizing data in ranges
+// const rangesMap = combination.reduce<Map<[number, number], []>>((map, current)=>{
+//     const endRangeIndex = combination.indexOf(current) 
+//     const startRangeIndex = !!endRangeIndex ? endRangeIndex - 1 : 0  
+//     return map.set([combination[startRangeIndex], current], []) }, new Map())

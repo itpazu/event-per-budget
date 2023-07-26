@@ -23,15 +23,14 @@ export default function RootLayout({
         <ReduxProvider>
           <main className="flex min-h-screen flex-col items-center lg:justify-start pb-32 pt-8 px-8 md:p-24 text-center">
             <HeaderFooter />
-
-            <div className="relative flex my-2 place-items-center">
+            {/* <div className='h-[40vh]'></div> */}
+            <div className="my-2 place-items-center aspect-square h-[45vh] relative w-auto">
               <Image
-                className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-                src="/Events.svg"
-                alt="Next.js Logo"
-                width={250}
-                height={85}
+                className="dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
+                src="/logo.svg"
+                alt="caltura Logo"
                 priority
+                fill={true}
               />
             </div>
 

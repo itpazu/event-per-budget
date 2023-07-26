@@ -2,7 +2,7 @@ import Event, { EventProps } from './components/event';
 
 
 export default async function Home() {
-  const res = await fetch('http://localhost:3000/api', { next: { revalidate: 1000 } })
+  const res = await fetch('http://localhost:3000/api', { next: { revalidate: 100 } })
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
     throw new Error('Failed to fetch data')

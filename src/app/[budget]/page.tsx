@@ -4,7 +4,7 @@ import SelectedEvents from "../components/selectedEvents";
 
 export default async function Page({ params: { budget } }: { params: { budget: string } }) {
     const url = `http://localhost:3000/api/budget-event?budget=${budget}`
-    const res = await fetch(url, { next: { revalidate: 1000 } })
+    const res = await fetch(url, { next: { revalidate: 10 } })
     if (!res.ok) {
         throw new Error('Failed to fetch data')
     }
