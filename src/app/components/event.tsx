@@ -1,3 +1,5 @@
+import type { VideoObject } from '../api/utils/getData';
+import VideoModal from '@/app/components/videoModal'
 export type EventProps = {
     id: number
     name: string;
@@ -5,8 +7,10 @@ export type EventProps = {
     details: string;
     children?: React.ReactNode;
     category: string;
+    video?: VideoObject
 }
-export default function Event({ name, cost, details, category, children }: EventProps) {
+export default function Event({ name, cost, details, category, children, video }: EventProps) {
+
 
     return (
 
@@ -27,7 +31,7 @@ export default function Event({ name, cost, details, category, children }: Event
             </div>
 
             <div className="text-lg" dir="rtl"> מחיר: {cost} שח </div>
-
+            {video && <VideoModal video={video} />}
             <div className="text-lg line-clamp-3 hover:line-clamp-none">  {details}</div>
         </div>
 

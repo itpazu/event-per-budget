@@ -16,6 +16,9 @@ module.exports = {
         sans: ['var(--font-shadow)', 'var(--font-source)'],
         // mono: ['var(--font-source)'],
       },
+      colors: {
+        btn: 'rgb(59 130 246 / 0.75)',
+      },
     },
   },
   plugins: [],

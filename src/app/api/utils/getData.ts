@@ -15,22 +15,26 @@ export type StrapiData<AT> = {
 }
 
 
-type VideoObject = {
+export type VideoObject = {
+    data: DataObject<
+        {
+            name: string,
+            alternativeText: null | string;
+            caption: null | string;
+            width: null | number;
+            height: null | number;
+            formats: null | number;
+            hash: string;
+            ext: string;
+            mime: string;
+            size: number;
+            url: string;
+            previewUrl: null | string;
+            provider: string;
+            provider_metadata: null | string;
 
-    name: string,
-    alternativeText: null | string;
-    caption: null | string;
-    width: null | number;
-    height: null | number;
-    formats: null | number;
-    hash: string;
-    ext: string;
-    mime: string;
-    size: number;
-    url: string;
-    previewUrl: null | string;
-    provider: string;
-    provider_metadata: null | string;
+        }
+    >
 
 }
 
@@ -50,7 +54,7 @@ export function getFromStrapi<AT>(path: string, urlParams: {} | null = null): Pr
     const searchParams = urlParams ? qs.stringify(urlParams, {
         encodeValuesOnly: true
     }) : '';
-    console.log(`${BASE_URL}/${path}?${searchParams}`)
+    // console.log(`${BASE_URL}/${path}?${searchParams}`)
     return fetch(`${BASE_URL}/${path}?${searchParams}`, { next: { revalidate: 100 } })
         .then(response => {
             if (!response.ok) {
@@ -59,74 +63,6 @@ export function getFromStrapi<AT>(path: string, urlParams: {} | null = null): Pr
             return response.json() as Promise<AT>
         }
         )
-}
-
-
-export const getDataModel = (res: FetchEvent) => res ? res.data.map(({ id, attributes }) => ({ id, ...attributes, category: attributes.category.data.attributes.category })) : []
-export const getData = (): Promise<EventProps[]> => {
-    return new Promise((resolve, reject) => {
-        resolve([
-            {
-                id: 1,
-                name: "מוסיקה",
-                category: 'מוסיקה',
-                cost: 300,
-                details: "לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית לפרומי בלוף קינץ תתיח לרעח. לת צשחמי צש בליא, מנסוטו צמלח לביקו ננבי, צמוקו בלוקריה שיצמה ברורק. נולום ארווס סאפיאן - פוסיליס קוויס, אקווזמן קולורס מונפרד אדנדום סילקוף,"
-            },
-            {
-                id: 2,
-                name: "מוסיקה",
-                category: 'מוסיקה',
-                cost: 100,
-                details: "לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית לפרומי בלוף קינץ תתיח לרעח. לת צשחמי צש בליא, מנסוטו צמלח לביקו ננבי, צמוקו בלוקריה שיצמה ברורק. נולום ארווס סאפיאן - פוסיליס קוויס, אקווזמן קולורס מונפרד אדנדום סילקוף,"
-            },
-            {
-                id: 3,
-                name: "מוסיקה",
-                category: 'מוסיקה',
-                cost: 100,
-                details: "לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית לפרומי בלוף קינץ תתיח לרעח. לת צשחמי צש בליא, מנסוטו צמלח לביקו ננבי, צמוקו בלוקריה שיצמה ברורק. נולום ארווס סאפיאן - פוסיליס קוויס, אקווזמן קולורס מונפרד אדנדום סילקוף,"
-            },
-            {
-                id: 4,
-                name: "מוסיקה",
-                category: 'מוסיקה',
-                cost: 200,
-                details: "לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית לפרומי בלוף קינץ תתיח לרעח. לת צשחמי צש בליא, מנסוטו צמלח לביקו ננבי, צמוקו בלוקריה שיצמה ברורק. נולום ארווס סאפיאן - פוסיליס קוויס, אקווזמן קולורס מונפרד אדנדום סילקוף,"
-            },
-            {
-                id: 5,
-                name: "מוסיקה",
-                category: 'מוסיקה',
-                cost: 300,
-                details: "לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית לפרומי בלוף קינץ תתיח לרעח. לת צשחמי צש בליא, מנסוטו צמלח לביקו ננבי, צמוקו בלוקריה שיצמה ברורק. נולום ארווס סאפיאן - פוסיליס קוויס, אקווזמן קולורס מונפרד אדנדום סילקוף,"
-            },
-            {
-                id: 6,
-                name: "טיול",
-                category: 'טיול',
-
-                cost: 300,
-                details: "לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית לפרומי בלוף קינץ תתיח לרעח. לת צשחמי צש בליא, מנסוטו צמלח לביקו ננבי, צמוקו בלוקריה שיצמה ברורק. נולום ארווס סאפיאן - פוסיליס קוויס, אקווזמן קולורס מונפרד אדנדום סילקוף,"
-            },
-            {
-                id: 7,
-                name: "טיול",
-                category: 'טיול',
-
-                cost: 300,
-                details: "לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית לפרומי בלוף קינץ תתיח לרעח. לת צשחמי צש בליא, מנסוטו צמלח לביקו ננבי, צמוקו בלוקריה שיצמה ברורק. נולום ארווס סאפיאן - פוסיליס קוויס, אקווזמן קולורס מונפרד אדנדום סילקוף,"
-            },
-            {
-                id: 8,
-                name: "רכיבה",
-                category: 'ספורט',
-
-                cost: 300,
-                details: "לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית לפרומי בלוף קינץ תתיח לרעח. לת צשחמי צש בליא, מנסוטו צמלח לביקו ננבי, צמוקו בלוקריה שיצמה ברורק. נולום ארווס סאפיאן - פוסיליס קוויס, אקווזמן קולורס מונפרד אדנדום סילקוף,"
-            }
-        ])
-    })
 }
 
 export const optimal_combination = (budget: number, programs: number[]) => {
@@ -170,6 +106,77 @@ export const optimal_combination = (budget: number, programs: number[]) => {
     }
     return optimalCombo;
 };
+
+export const getDataModel = (res: FetchEvent) => res ? res.data.map(({ id, attributes }) => ({ id, ...attributes, category: attributes.category.data.attributes.category })) : []
+
+//mock api
+// export const getData = (): Promise<EventProps[]> => {
+//     return new Promise((resolve, reject) => {
+//         resolve([
+//             {
+//                 id: 1,
+//                 name: "מוסיקה",
+//                 category: 'מוסיקה',
+//                 cost: 300,
+//                 details: "לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית לפרומי בלוף קינץ תתיח לרעח. לת צשחמי צש בליא, מנסוטו צמלח לביקו ננבי, צמוקו בלוקריה שיצמה ברורק. נולום ארווס סאפיאן - פוסיליס קוויס, אקווזמן קולורס מונפרד אדנדום סילקוף,"
+//             },
+//             {
+//                 id: 2,
+//                 name: "מוסיקה",
+//                 category: 'מוסיקה',
+//                 cost: 100,
+//                 details: "לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית לפרומי בלוף קינץ תתיח לרעח. לת צשחמי צש בליא, מנסוטו צמלח לביקו ננבי, צמוקו בלוקריה שיצמה ברורק. נולום ארווס סאפיאן - פוסיליס קוויס, אקווזמן קולורס מונפרד אדנדום סילקוף,"
+//             },
+//             {
+//                 id: 3,
+//                 name: "מוסיקה",
+//                 category: 'מוסיקה',
+//                 cost: 100,
+//                 details: "לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית לפרומי בלוף קינץ תתיח לרעח. לת צשחמי צש בליא, מנסוטו צמלח לביקו ננבי, צמוקו בלוקריה שיצמה ברורק. נולום ארווס סאפיאן - פוסיליס קוויס, אקווזמן קולורס מונפרד אדנדום סילקוף,"
+//             },
+//             {
+//                 id: 4,
+//                 name: "מוסיקה",
+//                 category: 'מוסיקה',
+//                 cost: 200,
+//                 details: "לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית לפרומי בלוף קינץ תתיח לרעח. לת צשחמי צש בליא, מנסוטו צמלח לביקו ננבי, צמוקו בלוקריה שיצמה ברורק. נולום ארווס סאפיאן - פוסיליס קוויס, אקווזמן קולורס מונפרד אדנדום סילקוף,"
+//             },
+//             {
+//                 id: 5,
+//                 name: "מוסיקה",
+//                 category: 'מוסיקה',
+//                 cost: 300,
+//                 details: "לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית לפרומי בלוף קינץ תתיח לרעח. לת צשחמי צש בליא, מנסוטו צמלח לביקו ננבי, צמוקו בלוקריה שיצמה ברורק. נולום ארווס סאפיאן - פוסיליס קוויס, אקווזמן קולורס מונפרד אדנדום סילקוף,"
+//             },
+//             {
+//                 id: 6,
+//                 name: "טיול",
+//                 category: 'טיול',
+
+//                 cost: 300,
+//                 details: "לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית לפרומי בלוף קינץ תתיח לרעח. לת צשחמי צש בליא, מנסוטו צמלח לביקו ננבי, צמוקו בלוקריה שיצמה ברורק. נולום ארווס סאפיאן - פוסיליס קוויס, אקווזמן קולורס מונפרד אדנדום סילקוף,"
+//             },
+//             {
+//                 id: 7,
+//                 name: "טיול",
+//                 category: 'טיול',
+
+//                 cost: 300,
+//                 details: "לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית לפרומי בלוף קינץ תתיח לרעח. לת צשחמי צש בליא, מנסוטו צמלח לביקו ננבי, צמוקו בלוקריה שיצמה ברורק. נולום ארווס סאפיאן - פוסיליס קוויס, אקווזמן קולורס מונפרד אדנדום סילקוף,"
+//             },
+//             {
+//                 id: 8,
+//                 name: "רכיבה",
+//                 category: 'ספורט',
+
+//                 cost: 300,
+//                 details: "לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית לפרומי בלוף קינץ תתיח לרעח. לת צשחמי צש בליא, מנסוטו צמלח לביקו ננבי, צמוקו בלוקריה שיצמה ברורק. נולום ארווס סאפיאן - פוסיליס קוויס, אקווזמן קולורס מונפרד אדנדום סילקוף,"
+//             }
+//         ])
+//     })
+// }
+
+
 
 // logic for organizing data in ranges
 // const rangesMap = combination.reduce<Map<[number, number], []>>((map, current)=>{

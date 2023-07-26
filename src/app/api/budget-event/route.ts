@@ -1,5 +1,5 @@
 import { NextResponse, NextRequest } from 'next/server'
-import { getData, optimal_combination, getFromStrapi, StrapiData, FetchEvent, getDataModel } from '../utils/getData'
+import { optimal_combination, getFromStrapi, StrapiData, FetchEvent, getDataModel } from '../utils/getData'
 import { EventProps } from '@/app/components/event';
 
 export async function GET(req: NextRequest) {
@@ -18,7 +18,6 @@ export async function GET(req: NextRequest) {
         },
         populate: "*"
     },)
-    console.log(res)
     const data = getDataModel(res)
         .reduce<Map<number, EventProps[]>>((mapped, currentEvent) => {
             return mapped.set(currentEvent.cost, [...(mapped.get(currentEvent.cost) || []), currentEvent])
