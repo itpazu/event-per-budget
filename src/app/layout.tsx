@@ -21,10 +21,9 @@ export default function RootLayout({
     <html lang="en | he" dir="rtl" className={`${ShadowsIntoLight.variable} ${SourceCodePro.variable}`}>
       <body >
         <ReduxProvider>
-          <main className="flex min-h-screen flex-col items-center lg:justify-start pb-32 pt-8 px-8 md:p-24 text-center">
+          <main className="flex min-h-screen pb-24 flex-col items-center lg:justify-start p-4 md:p-16 text-center">
             <HeaderFooter />
-            {/* <div className='h-[40vh]'></div> */}
-            <div className="my-2 place-items-center aspect-square h-[45vh] relative w-auto">
+            <div className="mt-2 place-items-center aspect-square h-[25vh] w-auto mb-[15vh] relative top-[8vh] lg:sticky lg:top-[20vh]">
               <Image
                 className="dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
                 src="/logo.svg"

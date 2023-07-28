@@ -54,10 +54,19 @@ export function getFromStrapi<AT>(path: string, urlParams: {} | null = null): Pr
     const searchParams = urlParams ? qs.stringify(urlParams, {
         encodeValuesOnly: true
     }) : '';
-    // console.log(`${BASE_URL}/${path}?${searchParams}`)
-    return fetch(`${BASE_URL}/${path}?${searchParams}`, { next: { revalidate: 100 } })
+    return fetch(`${BASE_URL}/${path}?${searchParams}`, {
+        next: {
+            revalidate: 100
+        },
+        headers: {
+            "content-type": "application/json",
+            "Authorization": `Bearer ${process.env.STRAPI_API_TOKEN}`,
+        }
+
+    })
         .then(response => {
             if (!response.ok) {
+                console.log(response.statusText)
                 throw new Error(response.statusText)
             }
             return response.json() as Promise<AT>

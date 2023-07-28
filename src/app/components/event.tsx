@@ -14,7 +14,7 @@ export default function Event({ name, cost, details, category, children, video }
 
     return (
 
-        <div className="flex flex-col shadow-lg drop-shadow-2xl rounded border-2 border-white-600 p-5 min-w-full min-h-[45vh] sm:min-h-[40vh] items-center justify-around font-mono text-center font-extrabold">
+        <div className="flex flex-col shadow-lg drop-shadow-2xl rounded border-2 border-white-600 p-5 min-h-[45vh] sm:min-h-[40vh] items-center justify-around font-mono text-center font-extrabold">
             {children && children}
             <div className='absolute top-[-12px] right-[-52px] rotate-45  border-x-transparent border-x-[80px] h-0 w-0 border-b-[80px] border-b-white'>
                 <div className="w-[115px]">
@@ -31,7 +31,7 @@ export default function Event({ name, cost, details, category, children, video }
             </div>
 
             <div className="text-lg" dir="rtl"> מחיר: {cost} שח </div>
-            {video && <VideoModal video={video} />}
+            {video && video?.data && <VideoModal video={video} />}
             <div className="text-lg line-clamp-3 hover:line-clamp-none">  {details}</div>
         </div>
 

@@ -7,7 +7,7 @@ export default function BudgetButton() {
 
     const { budget, spending } = useAppSelector(state => state.eventSlice)
     return (
-        <div className={budget < spending ? "program-btn" : 'mb-10 md:mb-0'}>
+        <div className={budget < spending ? "program-btn" : 'mb-5 md:mb-0'}>
 
             <Link
                 href={`/${budget}`}

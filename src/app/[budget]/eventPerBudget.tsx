@@ -38,39 +38,40 @@ export default function EventPerBudget({ data }: { data: Array<[number, EventPro
                 const scrollId = `scroll-container-${groupNumber}`
                 return (
 
-                    <div key={groupNumber + idx} className="grid relative grid-cols-1 justify-center font-bold grid-rows-auto border-indigo-600 border-4 gap-4 mb-5 items-center pb-3 bg-gradient-to-b from-zinc-200 lg:rounded-xl backdrop-blur-2xl bold" >
-                        {group.length > 1 && <button className="absolute top-[45%] left-[-40px]  h-[25px] w-[25px] md:left-[-50px] md:h-[40px] md:w-[40px] ml-2" onClick={(e) => HorizontalScroll(scrollId, false)}>
-                            <BsChevronDoubleLeft className="fill-indigo-800 h-full w-full" />
-                        </button>}
-                        <div className="h-[8vh] backdrop-blur-2xl" >
+                    <div key={groupNumber + idx} className="grid relative grid-cols-1 mb-[5vh] justify-center w-full place-items-center font-bold grid-rows-auto border-indigo-600 border-4 gap-2 md:gap-4 md:mb-5 items-center pb-3 bg-gradient-to-b from-zinc-200 lg:rounded-xl backdrop-blur-2xl bold overflow-hidden" >
 
+                        <div className="h-[8vh] backdrop-blur-2xl place-self-stretch flex justify-center md:justify-between items-center p-2" >
+
+                            {group.length > 1 &&
+
+                                <button className="hidden md:block h-[25px] w-[25px] md:w-[40px]" onClick={() => HorizontalScroll(scrollId, true)}>
+                                    <BsChevronDoubleRight size={'lg'} color={'#3730a3'} />
+                                </button>
+                            }
                             <p id={`category-${groupNumber}`} className="h-full flex flex-col justify-center text-3xl">
                                 {groupNumber} ₪
                             </p>
+                            {group.length > 1 && <button className="hidden md:block h-[25px] w-[25px] md:w-[40px]" onClick={(e) => HorizontalScroll(scrollId, false)}>
+                                <BsChevronDoubleLeft size={'lg'} color={'#3730a3'} />
+                            </button>}
                         </div>
-                        {group.length > 1 &&
-
-                            <button className="absolute top-[45%] right-[-40px]  h-[25px] w-[25px]  md:right-[-50px] md:h-[40px] md:w-[40px] mr-2" onClick={() => HorizontalScroll(scrollId, true)}>
-                                <BsChevronDoubleRight className="fill-indigo-500 h-full w-full" />
-                            </button>
-                        }
 
                         <div
                             id={scrollId}
-                            className="scroll-container flex flex-column gap-3 lg: flex-row flex-nowrap overflow-x-scroll scroll scroll-smooth"
+                            className="scroll-container flex flex-col gap-2 md:flex-row flex-nowrap overflow-x-scroll scroll scroll-smooth"
                         >
 
 
                             {
                                 group.map((event) => {
-                                    const { id, name, cost, details, category } = event
+                                    const { id, name, cost, details, category, video } = event
 
                                     return (
 
 
 
                                         <div key={name + id * 5} className={checkIfSelected(id) ? "min-w-[75%] lg:min-w-[55%] mx-3 border-2 border-purple-600" : "min-w-[75%] lg:min-w-[55%] mx-3"}>
-                                            <Event category={category} id={id} name={name} cost={cost} details={details} >
+                                            <Event video={video} category={category} id={id} name={name} cost={cost} details={details} >
                                                 <CheckBox event={event} disabled={checkIfInBudget(cost) || checkIfSelected(id)} isSelected={checkIfSelected(id)} />
                                             </Event>
 
