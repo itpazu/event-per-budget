@@ -4,7 +4,7 @@ import SelectedEvents from "../components/selectedEvents";
 
 export default async function Page({ params: { budget } }: { params: { budget: string } }) {
 
-    const url = `${process.env.UI_HOST_API}/budget-event?budget=${budget}`
+    const url = `api/budget-event?budget=${budget}`
     const res = await fetch(url, { cache: 'no-store' })
     if (!res.ok) {
         throw new Error(res.statusText)
