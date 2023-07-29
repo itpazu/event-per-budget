@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useRef } from 'react';
-import type { VideoObject, VideoLink } from '../api/utils/getData';
+import type { VideoObject, VideoLink } from '../getData';
 import { AiOutlineClose, AiFillPlayCircle } from 'react-icons/ai';
 
 const vidoeBaseUrl = process.env.NEXT_PUBLIC_STRAPI_URL;

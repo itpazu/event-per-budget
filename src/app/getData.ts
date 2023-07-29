@@ -55,15 +55,13 @@ export type FetchEvent = StrapiData<Omit<EventProps, "category" | "id"> &
     VideoLink: VideoLink | null;
 }>
 
-export async function getFromStrapi<AT>(path: string, urlParams: {} | null = null): Promise<AT> {
+export async function getFromStrapi<AT>(path: string, urlParams: {} | null = null, next: { [key: string]: string | number } = { revalidate: 100 },): Promise<AT> {
     const BASE_URL = process.env.STRAPI_URL_PRODUCTION
     const searchParams = urlParams ? qs.stringify(urlParams, {
         encodeValuesOnly: true
     }) : '';
     const res = await fetch(`${BASE_URL}/${path}?${searchParams}`, {
-        next: {
-            revalidate: 10
-        },
+        next,
         headers: {
             "Authorization": `Bearer ${process.env.STRAPI_API_TOKEN_PRODUCTION}`,
         }

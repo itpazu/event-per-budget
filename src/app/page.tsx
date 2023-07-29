@@ -1,13 +1,16 @@
-import Event, { EventProps } from './components/event';
-import type { VideoObject } from './api/utils/getData';
+import Event from './components/event';
+import { getFromStrapi, getDataModel, FetchEvent } from './getData';
 
 export default async function Home() {
-  const res = await fetch(`${process.env.UI_HOST_API}/events`, { next: { revalidate: 100 } })
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error('Failed to fetch data')
+  const res = await getFromStrapi<FetchEvent>("events", {
+    populate: {
+      category: true,
+      video: true
+    }
   }
-  const { data }: { data: Array<EventProps & { video: VideoObject }> } = await res.json()
+  )
+
+  const data = getDataModel(res)
 
   return (
 

@@ -1,4 +1,4 @@
-import type { VideoObject, VideoLink } from '../api/utils/getData';
+import type { VideoObject, VideoLink } from '../getData';
 import VideoModal from '@/app/components/videoModal'
 export type EventProps = {
     id: number

@@ -1,15 +1,10 @@
-import { EventProps } from "../components/event";
 import EventPerBudget from "./eventPerBudget";
 import SelectedEvents from "../components/selectedEvents";
+import { getEventPerBuget } from './budgetFetch';
 
 export default async function Page({ params: { budget } }: { params: { budget: string } }) {
 
-    const url = `${process.env.UI_HOST_API}/budget-event?budget=${budget}`
-    const res = await fetch(url, { cache: 'no-store' })
-    if (!res.ok) {
-        throw new Error(res.statusText)
-    }
-    const { data }: { data: Array<[number, EventProps[]]> } = await res.json()
+    const data = await getEventPerBuget(parseInt(budget))
     return (
         <>
             <div className="gap-2 flex flex-col lg:flex-row w-fit lg:w-full justify-between h-max items-center mb-14 sticky top-[81px] z-20 lg:top-[56px] text-white font-extrabold">
