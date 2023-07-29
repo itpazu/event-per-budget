@@ -25,9 +25,9 @@ export default function Event({ name, cost, details, category, children, video, 
                 </div>
             </div>
 
-            <div className="uppercase text-lg w-[52vw] flex justify-center">
+            <div className="uppercase text-lg w-[30vw] flex justify-center">
 
-                <p className="text-3xl text-center text-ellipsis whitespace-nowrap overflow-hidden w-[90%]"> {name} </p>
+                <p className="text-3xl text-center text-ellipsis whitespace-nowrap overflow-hidden w-[80%]"> {name} </p>
             </div>
 
             <div className="text-lg" dir="rtl"> מחיר: {cost} שח </div>
