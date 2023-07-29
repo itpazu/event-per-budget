@@ -33,9 +33,14 @@ export type VideoObject = {
             provider: string;
             provider_metadata: null | string;
 
-        }
+        } | null
     >
 
+}
+export type VideoLink = {
+    url: string;
+    provider: string;
+    providerUid: string;
 }
 
 
@@ -44,9 +49,10 @@ export type FetchEvent = StrapiData<Omit<EventProps, "category" | "id"> &
     category: {
         data: DataObject<{ category: string }>
     },
-    video?: {
-        data: DataObject<VideoObject>
+    video: {
+        data: DataObject<VideoObject>;
     }
+    VideoLink: VideoLink | null;
 }>
 
 export function getFromStrapi<AT>(path: string, urlParams: {} | null = null): Promise<AT> {
@@ -56,7 +62,7 @@ export function getFromStrapi<AT>(path: string, urlParams: {} | null = null): Pr
     }) : '';
     return fetch(`${BASE_URL}/${path}?${searchParams}`, {
         next: {
-            revalidate: 100
+            revalidate: 10
         },
         headers: {
             "content-type": "application/json",

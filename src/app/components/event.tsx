@@ -1,4 +1,4 @@
-import type { VideoObject } from '../api/utils/getData';
+import type { VideoObject, VideoLink } from '../api/utils/getData';
 import VideoModal from '@/app/components/videoModal'
 export type EventProps = {
     id: number
@@ -7,10 +7,10 @@ export type EventProps = {
     details: string;
     children?: React.ReactNode;
     category: string;
-    video?: VideoObject
+    video: VideoObject;
+    videolink: VideoLink;
 }
-export default function Event({ name, cost, details, category, children, video }: EventProps) {
-
+export default function Event({ name, cost, details, category, children, video, videolink }: EventProps) {
 
     return (
 
@@ -25,13 +25,14 @@ export default function Event({ name, cost, details, category, children, video }
                 </div>
             </div>
 
-            <div className="uppercase text-lg w-full">
+            <div className="uppercase text-lg w-[30vw] flex justify-center">
 
-                <p className="text-3xl text-center text-ellipsis whitespace-nowrap"> {name}</p>
+                <p className="text-3xl text-center text-ellipsis whitespace-nowrap overflow-hidden w-[80%]"> {name} </p>
             </div>
 
             <div className="text-lg" dir="rtl"> מחיר: {cost} שח </div>
-            {video && video?.data && <VideoModal video={video} />}
+            {!!video?.data && <VideoModal video={video} />}
+            {!!videolink && <VideoModal video={videolink} />}
             <div className="text-lg line-clamp-3 hover:line-clamp-none">  {details}</div>
         </div>
 

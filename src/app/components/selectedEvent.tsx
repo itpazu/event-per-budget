@@ -4,7 +4,7 @@ export default function SelectedEvent({ name, cost, details, collapse }: Partial
 
     return (
 
-        <div className={collapse ? 'h-0 overflow-hidden' : "flex flex-col shadow-lg drop-shadow-2xl rounded border-2 border-purple-600 p-5 min-w-full h-fit  items-center justify-around font-mono overflow-hidden gap-1"}>
+        <div className={collapse ? 'h-0 overflow-hidden' : "flex flex-col shadow-lg drop-shadow-2xl rounded border-2 border-purple-600 p-5 min-w-full h-full  items-center justify-around font-mono overflow-hidden gap-1"}>
 
             <div className="uppercase text-lg w-full">
 
