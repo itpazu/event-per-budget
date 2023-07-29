@@ -8,7 +8,6 @@ export default async function Home() {
     throw new Error('Failed to fetch data')
   }
   const { data }: { data: Array<EventProps & { video: VideoObject }> } = await res.json()
-  console.log(data)
 
   return (
 

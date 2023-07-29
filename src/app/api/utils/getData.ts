@@ -55,29 +55,27 @@ export type FetchEvent = StrapiData<Omit<EventProps, "category" | "id"> &
     VideoLink: VideoLink | null;
 }>
 
-export function getFromStrapi<AT>(path: string, urlParams: {} | null = null): Promise<AT> {
-    const BASE_URL = process.env.STRAPI_URL
+export async function getFromStrapi<AT>(path: string, urlParams: {} | null = null): Promise<AT> {
+    const BASE_URL = process.env.STRAPI_URL_PRODUCTION
     const searchParams = urlParams ? qs.stringify(urlParams, {
         encodeValuesOnly: true
     }) : '';
-    return fetch(`${BASE_URL}/${path}?${searchParams}`, {
+    const res = await fetch(`${BASE_URL}/${path}?${searchParams}`, {
         next: {
             revalidate: 10
         },
         headers: {
-            "content-type": "application/json",
-            "Authorization": `Bearer ${process.env.STRAPI_API_TOKEN}`,
+            "Authorization": `Bearer ${process.env.STRAPI_API_TOKEN_PRODUCTION}`,
         }
 
     })
-        .then(response => {
-            if (!response.ok) {
-                console.log(response.statusText)
-                throw new Error(response.statusText)
-            }
-            return response.json() as Promise<AT>
-        }
-        )
+
+    if (!res.ok) {
+        throw new Error(res.statusText)
+    }
+    return res.json() as Promise<AT>
+
+
 }
 
 export const optimal_combination = (budget: number, programs: number[]) => {
