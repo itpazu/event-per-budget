@@ -14,7 +14,7 @@ export default function EventPerBudget({ data }: { data: Array<[number, EventPro
     useEffect(() => {
         dispatch(setEventsPerBudget(data))
 
-    }, [data])
+    }, [data, dispatch])
 
     const { spending, budget, selectedEvent } = useAppSelector(state => state.eventSlice)
     const HorizontalScroll = (id: string, right: boolean) => {
