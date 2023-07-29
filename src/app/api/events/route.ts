@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { getFromStrapi, FetchEvent, getDataModel } from './utils/getData'
+import { getFromStrapi, FetchEvent, getDataModel } from '../utils/getData'
 
 export async function GET() {
     // const data = await getData()

@@ -2,7 +2,7 @@ import Event, { EventProps } from './components/event';
 import type { VideoObject } from './api/utils/getData';
 
 export default async function Home() {
-  const res = await fetch(`/api/`, { next: { revalidate: 100 } })
+  const res = await fetch(`/api/events`, { next: { revalidate: 100 } })
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
     throw new Error('Failed to fetch data')
