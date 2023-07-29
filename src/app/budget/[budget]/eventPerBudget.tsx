@@ -45,14 +45,14 @@ export default function EventPerBudget({ data }: { data: Array<[number, EventPro
 
                             {group.length > 1 &&
 
-                                <button className="hidden md:block h-[25px] w-[25px] md:w-[40px]" onClick={() => HorizontalScroll(scrollId, true)}>
+                                <button className="hidden md:block h-[25px] w-[25px] md:w-[40px]" onClick={() => HorizontalScroll(scrollId, false)}>
                                     <BsChevronDoubleRight size={'100%'} color={'#3730a3'} />
                                 </button>
                             }
                             <p id={`category-${groupNumber}`} className="h-full flex flex-col justify-center text-3xl">
                                 {groupNumber} ₪
                             </p>
-                            {group.length > 1 && <button className="hidden md:block h-[25px] w-[25px] md:w-[40px]" onClick={(e) => HorizontalScroll(scrollId, false)}>
+                            {group.length > 1 && <button className="hidden md:block h-[25px] w-[25px] md:w-[40px]" onClick={() => HorizontalScroll(scrollId, true)}>
                                 <BsChevronDoubleLeft size={'100%'} color={'#3730a3'} />
                             </button>}
                         </div>

@@ -1,4 +1,4 @@
-import { optimal_combination, getFromStrapi, FetchEvent, getDataModel } from '../getData'
+import { optimal_combination, getFromStrapi, FetchEvent, getDataModel } from '../../getData'
 import { EventProps } from '@/app/components/event';
 import _shuffle from 'lodash.shuffle';
 

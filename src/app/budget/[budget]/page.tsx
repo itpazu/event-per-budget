@@ -1,10 +1,11 @@
 import EventPerBudget from "./eventPerBudget";
-import SelectedEvents from "../components/selectedEvents";
+import SelectedEvents from "../../components/selectedEvents";
 import { getEventPerBuget } from './budgetFetch';
 
 export default async function Page({ params: { budget } }: { params: { budget: string } }) {
 
-    const data = await getEventPerBuget(parseInt(budget))
+    const searchBudget = budget.split('-')[1]
+    const data = await getEventPerBuget(parseInt(searchBudget))
     return (
         <>
             <div className="gap-2 flex flex-col lg:flex-row w-fit lg:w-full justify-between h-max items-center mb-14 sticky top-[81px] z-20 lg:top-[56px] text-white font-extrabold">

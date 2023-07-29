@@ -10,7 +10,7 @@ export default function BudgetButton() {
         <div className={budget < spending ? "program-btn" : 'mb-5 md:mb-0'}>
 
             <Link
-                href={`/${budget}`}
+                href={`/budget/budget-${budget}`}
                 className={budget === 0 || budget < spending ? "pointer-events-none" : 'pointer-events-auto'}
 
             >

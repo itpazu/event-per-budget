@@ -33,7 +33,8 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  height: 100vh;
+  height: fit-content;
+  position: relative;
 }
 .scroll-container::-webkit-scrollbar {
   display: none;
