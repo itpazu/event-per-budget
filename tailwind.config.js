@@ -19,6 +19,9 @@ module.exports = {
       colors: {
         btn: 'rgb(59 130 246 / 0.75)',
       },
+      flexGrow: {
+        2: '2',
+      },
     },
   },
   plugins: [],

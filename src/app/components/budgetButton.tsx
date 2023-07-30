@@ -6,9 +6,11 @@ import Link from 'next/link';
 export default function BudgetButton() {
 
     const { budget, spending } = useAppSelector(state => state.eventSlice)
+
+
     return (
         <div className={budget < spending ? "program-btn" : 'mb-5 md:mb-0'}>
-
+            { }
             <Link
                 href={`/budget/budget-${budget}`}
                 className={budget === 0 || budget < spending ? "pointer-events-none" : 'pointer-events-auto'}

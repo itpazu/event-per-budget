@@ -4,6 +4,7 @@ import { Shadows_Into_Light, Source_Code_Pro } from 'next/font/google'
 import Image from 'next/image'
 import ReduxProvider from '@/redux/provider';
 import HeaderFooter from './components/HeaderFooter';
+import BackButton from './components/backBtn';
 
 const ShadowsIntoLight = Shadows_Into_Light({ weight: "400", subsets: ['latin'], variable: '--font-shadow' })
 const SourceCodePro = Source_Code_Pro({ weight: "500", subsets: ['latin'], variable: '--font-source' })
@@ -22,6 +23,7 @@ export default function RootLayout({
       <body >
         <ReduxProvider>
           <main className="flex min-h-screen pb-24 flex-col items-center lg:justify-start p-4 md:p-16 text-center">
+            <BackButton />
             <HeaderFooter />
             <div className="mt-2 place-items-center aspect-square h-[25vh] w-auto mb-[15vh] relative top-[8vh] lg:sticky lg:top-[20vh]">
               <Image
