@@ -13,7 +13,7 @@ export default function RefreshButton() {
 
     return (
         <button
-            className='grow-1 border p-2 rounded-full bg-purple-500 hover:bg-slate-400'
+            className='grow-1 border p-2 rounded-full bg-purple-500 lg:hover:bg-slate-400'
             onClick={handleRefresh}
         > רענן </button>
 
