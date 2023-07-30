@@ -120,7 +120,9 @@ export const optimal_combination = (budget: number, programs: number[]) => {
     return optimalCombo;
 };
 
-export const getDataModel = (res: FetchEvent) => res ? res.data.map(({ id, attributes }) => ({ id, ...attributes, category: attributes.category.data.attributes.category })) : []
+export const getDataModel = (res: FetchEvent) => res ? res.data.map(({ id, attributes }) => ({
+    id, ...attributes, category: attributes.category.data?.attributes.category ?? ''
+})) : []
 
 //mock api
 // export const getData = (): Promise<EventProps[]> => {
