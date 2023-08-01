@@ -59,7 +59,9 @@ export default function EventPerBudget({ data }: { data: Array<[number, EventPro
 
                         <div
                             id={scrollId}
-                            className="scroll-container flex flex-col gap-2 md:flex-row flex-nowrap overflow-x-scroll scroll scroll-smooth"
+                            className={group.length > 2 ?
+                                "items-center scroll-container flex flex-col gap-2 md:flex-row flex-nowrap overflow-x-scroll scroll scroll-smooth w-[100%]" :
+                                "justify-center items-center scroll-container flex flex-col gap-2 md:flex-row flex-nowrap overflow-x-scroll scroll scroll-smooth w-[100%]"}
                         >
 
 
@@ -70,8 +72,8 @@ export default function EventPerBudget({ data }: { data: Array<[number, EventPro
                                     return (
 
 
-
-                                        <div key={name + id * 5} className={checkIfSelected(id) ? "min-w-[90%] lg:min-w-[55%] mx-3 border-2 border-purple-600" : "min-w-[75%] lg:min-w-[55%] mx-3"}>
+                                        <div key={name + id * 5} className={checkIfSelected(id) ? "mx-3 border-2 border-purple-600 w-[80%] lg:max-w-[80%] lg:w-[45%] max-w-[45%]" :
+                                            "mx-3 w-[80%] max-w-[80%] lg:w-[45%] lg:max-w-[50%]"}>
                                             <Event videolink={videolink} video={video} category={category} id={id} name={name} cost={cost} details={details} >
                                                 <CheckBox event={event} disabled={checkIfInBudget(cost) || checkIfSelected(id)} isSelected={checkIfSelected(id)} />
                                             </Event>
