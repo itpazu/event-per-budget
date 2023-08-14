@@ -57,23 +57,29 @@ export type FetchEvent = StrapiData<Omit<EventProps, "category" | "id"> &
 
 export async function getFromStrapi<AT>(path: string, urlParams: {} | null = null,
     chacheObj: { [key: string]: { [key: string]: number } } | { [key: string]: string } = { next: { revalidate: 100 } }): Promise<AT> {
-    const BASE_URL = process.env.STRAPI_URL_PRODUCTION
-    const searchParams = urlParams ? qs.stringify(urlParams, {
-        encodeValuesOnly: true
-    }) : '';
 
-    const fetchOptions = {
-        ...chacheObj,
-        headers: {
-            "Authorization": `Bearer ${process.env.STRAPI_API_TOKEN_PRODUCTION}`,
+    if (process.env.NODE_ENV === "production") {
+
+        const BASE_URL = process.env.STRAPI_URL_PRODUCTION
+        const searchParams = urlParams ? qs.stringify(urlParams, {
+            encodeValuesOnly: true
+        }) : '';
+
+        const fetchOptions = {
+            ...chacheObj,
+            headers: {
+                "Authorization": `Bearer ${process.env.STRAPI_API_TOKEN_PRODUCTION}`,
+            }
         }
-    }
-    const res = await fetch(`${BASE_URL}/${path}?${searchParams}`, fetchOptions)
+        const res = await fetch(`${BASE_URL}/${path}?${searchParams}`, fetchOptions)
 
-    if (!res.ok) {
-        throw new Error(res.statusText)
+        if (!res.ok) {
+            throw new Error(res.statusText)
+        }
+        return res.json() as Promise<AT>
+    } else {
+        return getData()
     }
-    return res.json() as Promise<AT>
 
 
 }
@@ -125,71 +131,15 @@ export const getDataModel = (res: FetchEvent) => res ? res.data.map(({ id, attri
 })) : []
 
 //mock api
-// export const getData = (): Promise<EventProps[]> => {
-//     return new Promise((resolve, reject) => {
-//         resolve([
-//             {
-//                 id: 1,
-//                 name: "מוסיקה",
-//                 category: 'מוסיקה',
-//                 cost: 300,
-//                 details: "לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית לפרומי בלוף קינץ תתיח לרעח. לת צשחמי צש בליא, מנסוטו צמלח לביקו ננבי, צמוקו בלוקריה שיצמה ברורק. נולום ארווס סאפיאן - פוסיליס קוויס, אקווזמן קולורס מונפרד אדנדום סילקוף,"
-//             },
-//             {
-//                 id: 2,
-//                 name: "מוסיקה",
-//                 category: 'מוסיקה',
-//                 cost: 100,
-//                 details: "לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית לפרומי בלוף קינץ תתיח לרעח. לת צשחמי צש בליא, מנסוטו צמלח לביקו ננבי, צמוקו בלוקריה שיצמה ברורק. נולום ארווס סאפיאן - פוסיליס קוויס, אקווזמן קולורס מונפרד אדנדום סילקוף,"
-//             },
-//             {
-//                 id: 3,
-//                 name: "מוסיקה",
-//                 category: 'מוסיקה',
-//                 cost: 100,
-//                 details: "לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית לפרומי בלוף קינץ תתיח לרעח. לת צשחמי צש בליא, מנסוטו צמלח לביקו ננבי, צמוקו בלוקריה שיצמה ברורק. נולום ארווס סאפיאן - פוסיליס קוויס, אקווזמן קולורס מונפרד אדנדום סילקוף,"
-//             },
-//             {
-//                 id: 4,
-//                 name: "מוסיקה",
-//                 category: 'מוסיקה',
-//                 cost: 200,
-//                 details: "לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית לפרומי בלוף קינץ תתיח לרעח. לת צשחמי צש בליא, מנסוטו צמלח לביקו ננבי, צמוקו בלוקריה שיצמה ברורק. נולום ארווס סאפיאן - פוסיליס קוויס, אקווזמן קולורס מונפרד אדנדום סילקוף,"
-//             },
-//             {
-//                 id: 5,
-//                 name: "מוסיקה",
-//                 category: 'מוסיקה',
-//                 cost: 300,
-//                 details: "לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית לפרומי בלוף קינץ תתיח לרעח. לת צשחמי צש בליא, מנסוטו צמלח לביקו ננבי, צמוקו בלוקריה שיצמה ברורק. נולום ארווס סאפיאן - פוסיליס קוויס, אקווזמן קולורס מונפרד אדנדום סילקוף,"
-//             },
-//             {
-//                 id: 6,
-//                 name: "טיול",
-//                 category: 'טיול',
+export const getData = <AT>(): Promise<AT> => {
 
-//                 cost: 300,
-//                 details: "לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית לפרומי בלוף קינץ תתיח לרעח. לת צשחמי צש בליא, מנסוטו צמלח לביקו ננבי, צמוקו בלוקריה שיצמה ברורק. נולום ארווס סאפיאן - פוסיליס קוויס, אקווזמן קולורס מונפרד אדנדום סילקוף,"
-//             },
-//             {
-//                 id: 7,
-//                 name: "טיול",
-//                 category: 'טיול',
+    return new Promise((resolve, reject) => {
+        import('../../mock.json').then(data =>
+            resolve(data.default as AT)
 
-//                 cost: 300,
-//                 details: "לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית לפרומי בלוף קינץ תתיח לרעח. לת צשחמי צש בליא, מנסוטו צמלח לביקו ננבי, צמוקו בלוקריה שיצמה ברורק. נולום ארווס סאפיאן - פוסיליס קוויס, אקווזמן קולורס מונפרד אדנדום סילקוף,"
-//             },
-//             {
-//                 id: 8,
-//                 name: "רכיבה",
-//                 category: 'ספורט',
-
-//                 cost: 300,
-//                 details: "לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית לפרומי בלוף קינץ תתיח לרעח. לת צשחמי צש בליא, מנסוטו צמלח לביקו ננבי, צמוקו בלוקריה שיצמה ברורק. נולום ארווס סאפיאן - פוסיליס קוויס, אקווזמן קולורס מונפרד אדנדום סילקוף,"
-//             }
-//         ])
-//     })
-// }
+        )
+    })
+}
 
 
 

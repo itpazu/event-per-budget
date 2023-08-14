@@ -1,7 +1,8 @@
 import Event from './components/event';
-import { getFromStrapi, getDataModel, FetchEvent } from './getData';
+import { getFromStrapi, getDataModel, FetchEvent, getData } from './getData';
 
 export default async function Home() {
+
   const res = await getFromStrapi<FetchEvent>("events", {
     populate: {
       category: true,

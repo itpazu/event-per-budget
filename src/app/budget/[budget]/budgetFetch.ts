@@ -8,16 +8,25 @@ export async function getEventPerBuget(budget = 0) {
     const costs = _shuffle(Array.from(new Set(allEvents.data.map(({ attributes: { cost } }) => cost))))
     const combination = optimal_combination(budget, costs)
     let data: Array<[number, EventProps[]]> | [] = []
-    if (combination.length !== 0) {
 
-        const res = await getFromStrapi<FetchEvent>('events', {
-            filters: {
-                cost: {
-                    $in: combination,
+    if (combination.length !== 0) {
+        let res;
+        if (process.env.NODE_ENV === "production") {
+
+            res = await getFromStrapi<FetchEvent>('events', {
+                filters: {
+                    cost: {
+                        $in: combination,
+                    },
                 },
-            },
-            populate: "*"
-        }, { cache: "no-store" })
+                populate: "*"
+            }, { cache: "no-store" })
+
+        } else {
+
+            const filteredMock = allEvents.data.filter(event => combination.includes(event.attributes.cost))
+            res = { data: filteredMock }
+        }
         const dataMap = getDataModel(res)
             .reduce<Map<number, EventProps[]>>((mapped, currentEvent) => {
                 return mapped.set(currentEvent.cost, [...(mapped.get(currentEvent.cost) || []), currentEvent])
