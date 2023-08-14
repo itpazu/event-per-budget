@@ -11,7 +11,7 @@ export async function getEventPerBuget(budget = 0) {
 
     if (combination.length !== 0) {
         let res;
-        if (process.env.VERCEL_ENV === "production") {
+        if (process.env.STRAPI_STATUS === "production") {
 
             res = await getFromStrapi<FetchEvent>('events', {
                 filters: {

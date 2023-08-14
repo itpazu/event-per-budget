@@ -58,7 +58,7 @@ export type FetchEvent = StrapiData<Omit<EventProps, "category" | "id"> &
 export async function getFromStrapi<AT>(path: string, urlParams: {} | null = null,
     chacheObj: { [key: string]: { [key: string]: number } } | { [key: string]: string } = { next: { revalidate: 100 } }): Promise<AT> {
 
-    if (process.env.VERCEL_ENV === "production") {
+    if (process.env.STRAPI_STATUS === "production") {
         const BASE_URL = process.env.STRAPI_URL_PRODUCTION
         const searchParams = urlParams ? qs.stringify(urlParams, {
             encodeValuesOnly: true
