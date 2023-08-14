@@ -11,7 +11,7 @@ export async function getEventPerBuget(budget = 0) {
 
     if (combination.length !== 0) {
         let res;
-        if (process.env.NODE_ENV === "production") {
+        if (process.env.NODE_ENV === "production" || process.env.CURRENT_ENV === "production") {
 
             res = await getFromStrapi<FetchEvent>('events', {
                 filters: {
